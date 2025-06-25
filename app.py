@@ -126,6 +126,25 @@ def getUserById(id):
             "error" : "Invalid User Id!"
         }), 400
 
+# Get author by id
+@app.route('/author/<id>', methods=['GET'])
+def getAuthorById(id):
+    try:
+        author = db.authors.find_one({
+            "_id" : ObjectId(id)
+        })
+        if author:
+            author['_id'] = str(author['_id'])
+            return jsonify(author)
+        else:
+            return jsonify({
+                "error" : "Author not found!"
+            }), 404
+    except:
+        return jsonify({
+            "error" : "Invalid Author Id!"
+        }), 400
+
 # ---------------- Get by id route end -----------------
 
 # Run the server

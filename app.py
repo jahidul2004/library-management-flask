@@ -79,7 +79,17 @@ def addAUser():
         "inserted_id":str(result.inserted_id)
     }),201
     
-
+# Add a single author route
+@app.route('/author', methods=['POST'])
+def addAAuthor():
+    authorData = request.json
+    result = db.authors.insert_one(authorData)
+    
+    return jsonify({
+        "message":"Author successfully inserted!",
+        "inserted_id":str(result.inserted_id)
+    }),201
+    
 # ------------------ Post routes end ------------------
 
 # Run the server

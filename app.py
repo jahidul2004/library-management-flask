@@ -145,6 +145,25 @@ def getAuthorById(id):
             "error" : "Invalid Author Id!"
         }), 400
 
+# Get book by id
+@app.route('/book/<id>', methods=['GET'])
+def getBookById(id):
+    try:
+        book = db.books.find_one({
+            "_id" : ObjectId(id)
+        })
+        if book:
+            book['_id'] = str(book['_id'])
+            return jsonify(book)
+        else:
+            return jsonify({
+                "error" : "Book not found!"
+            }), 404
+    except:
+        return jsonify({
+            "error" : "Invalid Book Id!"
+        }), 400
+
 # ---------------- Get by id route end -----------------
 
 # Run the server

@@ -1,8 +1,8 @@
 # Flask, Jsonify & Request import
-from flask import flash, jsonify, request
+from flask import Flask, jsonify, request
 
 # Create app
-app = flash(__name__)
+app = Flask(__name__)
 
 # Root Route
 @app.route('/')

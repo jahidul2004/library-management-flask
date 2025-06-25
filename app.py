@@ -90,6 +90,17 @@ def addAAuthor():
         "inserted_id":str(result.inserted_id)
     }),201
     
+# Ass a single borrow record
+@app.route('/borrowRecord', methods=['POST'])
+def addABorrowRecord():
+    borrowRecordData = request.json
+    result = db.borrowRecords.insert_one(borrowRecordData)
+    
+    return jsonify({
+        "message":"Borrow Record successfully inserted!",
+        "inserted_id":str(result.inserted_id)
+    }),201
+    
 # ------------------ Post routes end ------------------
 
 # Run the server

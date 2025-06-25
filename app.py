@@ -35,6 +35,14 @@ def getAuthors():
         authors.append(author)
     return jsonify(authors)
 
+# Get all users
+@app.route('/users', methods=['GET'])
+def getUsers():
+    users = []
+    for user in db.users.find():
+        user['_id'] = str(user['_id'])
+        users.append(user)
+    return jsonify(users)
 # ------------------ Get Route end --------------------
 
 # Run the server

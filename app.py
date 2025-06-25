@@ -15,7 +15,7 @@ db = client.libraryDB
 def home():
     return 'Library Management System is Running!'
 
-# ------------------ All get Route --------------------
+# ------------------ All get Routes --------------------
 
 # Get all books
 @app.route('/books',methods=['GET'])
@@ -54,6 +54,22 @@ def getBorrowRecords():
     return jsonify(borrowRecords)
 
 # ------------------ Get Route end --------------------
+
+# ------------------ All post routes ------------------
+
+# Add a single book route
+@app.route('/book', methods=['POST'])
+def addABook():
+    bookData = request.json
+    result = db.books.insert_one(bookData)
+    
+    return jsonify({
+        "message":"Book successfully inserted!",
+        "inserted_id":str(result.inserted_id)
+    }),201
+    
+
+# ------------------ Post routes end ------------------
 
 # Run the server
 if __name__ == '__main__':

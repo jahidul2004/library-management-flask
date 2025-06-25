@@ -15,6 +15,19 @@ db = client.libraryDB
 def home():
     return 'Library Management System is Running!'
 
+# ------------------ All get Route --------------------
+
+# Get all books
+@app.route('/books',methods=['GET'])
+def getBooks():
+    books = []
+    for book in db.books.find():
+        book['_id'] = str(book['_id'])
+        books.append(book)
+    return jsonify(books)
+
+# ------------------ Get Route end --------------------
+
 # Run the server
 if __name__ == '__main__':
     app.run(debug = True)

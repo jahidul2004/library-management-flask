@@ -163,6 +163,25 @@ def getBookById(id):
         return jsonify({
             "error" : "Invalid Book Id!"
         }), 400
+        
+# Get borrowRecord by id
+@app.route('/borrowRecord/<id>', methods=['GET'])
+def getBorrowRecordById(id):
+    try:
+        borrowRecord = db.borrowRecords.find_one({
+            "_id" : ObjectId(id)
+        })
+        if borrowRecord:
+            borrowRecord['_id'] = str(borrowRecord['_id'])
+            return jsonify(borrowRecord)
+        else:
+            return jsonify({
+                "error" : "Borrow Record not found!"
+            }), 404
+    except:
+        return jsonify({
+            "error" : "Invalid Borrow Record Id!"
+        }), 400
 
 # ---------------- Get by id route end -----------------
 

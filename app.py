@@ -43,6 +43,16 @@ def getUsers():
         user['_id'] = str(user['_id'])
         users.append(user)
     return jsonify(users)
+
+# Get all borrowRecords
+@app.route('/borrowRecords', methods=['GET'])
+def getBorrowRecords():
+    borrowRecords = []
+    for borrowRecord in db.borrowRecords.find():
+        borrowRecord['_id'] = str(borrowRecord['_id'])
+        borrowRecords.append(borrowRecord)
+    return jsonify(borrowRecords)
+
 # ------------------ Get Route end --------------------
 
 # Run the server

@@ -68,6 +68,17 @@ def addABook():
         "inserted_id":str(result.inserted_id)
     }),201
     
+# Add a single user route
+@app.route('/user', methods=['POST'])
+def addAUser():
+    userData = request.json
+    result = db.users.insert_one(userData)
+    
+    return jsonify({
+        "message":"User successfully inserted!",
+        "inserted_id":str(result.inserted_id)
+    }),201
+    
 
 # ------------------ Post routes end ------------------
 

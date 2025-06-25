@@ -2,6 +2,8 @@
 from flask import Flask, jsonify, request
 # MongoClient import
 from pymongo import MongoClient
+# Object id import
+from bson.objectid import ObjectId
 
 # Create app
 app = Flask(__name__)
@@ -102,6 +104,29 @@ def addABorrowRecord():
     }),201
     
 # ------------------ Post routes end ------------------
+
+# ----------------- Get by id route -------------------
+
+# Get user by id
+@app.route('/user/<id>', methods=['GET'])
+def getUserById(id):
+    try:
+        user = db.users.find_one({
+            "_id" : ObjectId(id)
+        })
+        if user:
+            user['_id'] = str(user['_id'])
+            return jsonify(user)
+        else:
+            return jsonify({
+                "error" : "User not found!"
+            }), 404
+    except:
+        return jsonify({
+            "error" : "Invalid User Id!"
+        }), 400
+
+# ---------------- Get by id route end -----------------
 
 # Run the server
 if __name__ == '__main__':
